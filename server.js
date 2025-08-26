@@ -16,7 +16,7 @@ const serveFile = async (res, filePath, contentType) => {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("404 page not found");
   }
-};
+}; 
 
 const loadLinks = async () => {
   try {
