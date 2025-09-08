@@ -1,5 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import PORT from "./env.js";
+import { env } from "./config/env.js";
 // import router from "./routes/shortener.routes.js";
 import { shortenedRoutes } from "./routes/shortener.routes.js";
 
@@ -12,10 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 // app.set("views", "./views");
 
-
 //express router
 // app.use(router);
 app.use(shortenedRoutes);
+
+const PORT = env.PORT;
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
