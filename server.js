@@ -4,6 +4,7 @@ import express from "express";
 import { env } from "./config/env.js";
 // import router from "./routes/shortener.routes.js";
 import { shortenedRoutes } from "./routes/shortener.routes.js";
+import { connectDB } from "./config/db-client.js";
 
 const app = express();
 
@@ -20,6 +21,11 @@ app.use(shortenedRoutes);
 
 const PORT = env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+try {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+} catch (error) {
+  console.log(error);
+}
